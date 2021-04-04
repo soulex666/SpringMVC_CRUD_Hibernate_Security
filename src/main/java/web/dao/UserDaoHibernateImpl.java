@@ -14,8 +14,8 @@ public class UserDaoHibernateImpl implements UserDao {
     private EntityManager entityManager;
 
     @Override
-    public void saveUser(String firstName, String lastName, byte age) {
-        entityManager.persist(new User(firstName, lastName, age));
+    public void saveUser(String firstName, String lastName, byte age, String username, String password) {
+        entityManager.persist(new User(firstName, lastName, age, username, password));
     }
 
     @Override
@@ -29,6 +29,13 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public User getUserById(long id) {
         return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return entityManager.createQuery(
+                "SELECT u FROM User u WHERE u.username = :username", User.class).
+                setParameter("username", username).getSingleResult();
     }
 
     @Override

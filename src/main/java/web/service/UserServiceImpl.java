@@ -10,13 +10,14 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserDao userDao;
 
     @Transactional
     @Override
-    public void saveUser(String name, String lastName, byte age) {
-        userDao.saveUser(name, lastName, age);
+    public void saveUser(String name, String lastName, byte age, String username, String password) {
+        userDao.saveUser(name, lastName, age, username, password);
     }
 
     @Transactional
@@ -41,5 +42,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
         userDao.update(user);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 }

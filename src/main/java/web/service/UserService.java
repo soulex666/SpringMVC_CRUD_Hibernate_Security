@@ -5,7 +5,7 @@ import web.model.User;
 import java.util.List;
 
 public interface UserService {
-    void saveUser(String name, String lastName, byte age);
+    void saveUser(String name, String lastName, byte age, String username, String password);
 
     void removeUserById(long id);
 
@@ -14,4 +14,6 @@ public interface UserService {
     List<User> getAllUsers();
 
     void update(User user);
+
+    User findByUsername(String username);
 }
